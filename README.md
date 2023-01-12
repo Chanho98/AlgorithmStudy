@@ -103,6 +103,64 @@ print(fib(100))
 354224848179261915075
 ```
 
-## 4. Greedy Algorithm
+## 4.1. Greedy Algorithm
+현재 상황에서 가장 좋은 방법을 고르는 방법으로 전체적으로나 미래적으로 끼칠 영향에 대해서는 고려하지 않는 방법
 
-## 5. Recursion Function
+## 4.2. Greedy Algorithm을 이용한 최소한의 동전으로 거슬러 주는 예제
+```
+def min_coin_count(value, coin_list):
+    min_coin_counts = 0
+
+    # coin_list를 내림차순으로 정렬해준다.
+    coin_list.sort(reverse=True)
+
+    # 크기가 큰 동전 순서로 연산해준다.
+    for coin in coin_list:
+        if value // coin != 0:
+            coin_counts = value // coin
+            value -= coin * coin_counts
+            min_coin_counts += coin_counts
+
+
+    return min_coin_counts
+
+# 테스트
+default_coin_list = [100, 500, 10, 50]
+print(min_coin_count(1440, default_coin_list))
+print(min_coin_count(1700, default_coin_list))
+print(min_coin_count(23520, default_coin_list))
+print(min_coin_count(32590, default_coin_list))
+```
+테스트 코드 실행 결과
+```
+10
+5
+49
+70
+```
+## 5.1. Recursion Function
+함수를 정의하는 과정에서 그 함수를 다시 호출하는 방식으로 설정하는 것, 이 때 호출 단계와 최종 단계를 구분해 주어야 한다.
+
+## 5.2. 재귀함수를 이용하여 피보나치 수열 구현
+```
+def fib(n):
+    """basic case"""
+    if n == 1 or n == 2:
+        return 1
+    """recursion case"""
+    if n > 2:
+        return fib(n - 1) + fib(n - 2)
+
+
+for i in range(1, 7):
+    print(fib(i))
+```
+테스트 코드 실행 결과
+```
+1
+1
+2
+3
+5
+8
+```
